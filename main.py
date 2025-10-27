@@ -1,3 +1,5 @@
+import sys
+
 from stats import count_words, char_usage, usage_to_sorted_list
 
 
@@ -22,12 +24,15 @@ def print_report(file_path, word_count, sorted_item_list):
 
 
 def main():
-    frankenstein_path = "books/frankenstein.txt"
-    frankenstein_content = get_book_text(frankenstein_path)
-    word_count = count_words(frankenstein_content)
-    char_count = char_usage(frankenstein_content)
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    file_path = sys.argv[1]
+    content = get_book_text(file_path)
+    word_count = count_words(content)
+    char_count = char_usage(content)
     sorted_item_list = usage_to_sorted_list(char_count)
-    print_report(frankenstein_path, word_count, sorted_item_list)
+    print_report(file_path, word_count, sorted_item_list)
 
 
 main()
